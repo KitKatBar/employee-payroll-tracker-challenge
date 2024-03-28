@@ -67,6 +67,21 @@ const collectEmployees = function() {
 // Display the average salary
 const displayAverageSalary = function(employeesArray) {
   // TODO: Calculate and display the average salary
+  let salarySum = 0;
+  
+    for (let i = 0; i < employeesArray.length; i++) {
+      salarySum = salarySum + employeesArray[i].salary;
+      //salarySum += employeesArray[i].salary;
+      console.log(employeesArray[i].salary);
+      console.log(salarySum);
+    }
+  
+  const averageSalary = salarySum / employeesArray.length;
+  
+  console.log(`The average employee salary between our ${employeesArray.length} employee(s) is ${averageSalary.toLocaleString("en-US",{
+    style:"currency",
+    currency:"USD"
+  })}`);
 }
 
 // Select a random employee
