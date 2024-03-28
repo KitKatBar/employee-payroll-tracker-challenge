@@ -3,92 +3,85 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
 // Collect employee data
 const collectEmployees = function() {
-  // TODO: Get user input to create and return an array of employee objects
-
-  /*
-  let employeeArray = [];
-  console.log(employeeArray);
-
-  let employee = {
-    firstName: "",
-    lastName: "",
-    salary: 0
-  }
-
-  let input = "";
-
-  while (input != null) {
-    employee.firstName = prompt("Enter first name:");
-    console.log(employee.firstName);
-    employee.lastName = prompt("Enter last name:");
-    console.log(employee.lastName);
-    employee.salary = prompt("Enter salary name:");
-    console.log(employee.salary);
-
-    employeeArray.push(employee);
-    console.log(employee);
-    console.log(employeeArray);
-    console.log(input);
-    input = prompt("Do you want to add another employee?");
-    console.log(input);
-  }
-
-  return employeeArray;
-  */
-
+  // Declare an empty array to store our employees
   const employeeArray = [];
+  // Define a variable to keep asking the user for input
   let input = true;
 
+  // If the user wants to keep adding employees, then we keep going
   while (input) {
+    /*
+      prompt opens up a window that lets a user enter input, with options "ok" and "cancel"
+      Returns the input (which can be an empty string) if "ok" is selected
+      Returns null if "cancel" is selected
+    */
     const firstName = prompt("Enter employee's first name:");
     const lastName = prompt("Enter employee's last name:");
     let salary = prompt("Enter employee's salary:");
 
+    // Checks if salary is not a number (NaN), then assigns 0 if it is true
     if(isNaN(salary)) {
       salary = 0;
     }
 
+    /*
+      Employee object that has a first name, last name and salary
+      The input is assigned to each value, but the salary must be parsed because the input is a string
+    */
     const employee = {
       firstName: firstName,
       lastName: lastName,
       salary: parseInt(salary)
     }
 
+    // Add the employee to the employee array
     employeeArray.push(employee);
-    console.log(employee);
-    console.log(employeeArray);
 
+    /*
+      confirm opens up a window with options "ok" and "cancel" and returns a boolean
+      Returns true if "ok" is selected
+      Returns false if "cancel" is selected
+    */
     input = confirm("Do you want to add another employee?");
   }
 
+  // Return the employee array
   return employeeArray;
 }
 
 // Display the average salary
 const displayAverageSalary = function(employeesArray) {
-  // TODO: Calculate and display the average salary
+  // Declare a sum variable initialized to zero so we can add the total of all the employee's salaries
   let salarySum = 0;
   
+    // Iterate over the employee list and sum up their salaries
     for (let i = 0; i < employeesArray.length; i++) {
       salarySum = salarySum + employeesArray[i].salary;
-      //salarySum += employeesArray[i].salary;
-      console.log(employeesArray[i].salary);
-      console.log(salarySum);
     }
   
+  // Calculate the average salary by dividing the total salary by the number of employees
   const averageSalary = salarySum / employeesArray.length;
   
+  /*
+    Display the number of employees and the average salary between them
+    toLocaleString() will format the display to a string, in this case, displaying it as USD currency
+  */
   console.log(`The average employee salary between our ${employeesArray.length} employee(s) is ${averageSalary.toLocaleString("en-US",{
     style:"currency",
     currency:"USD"
-  })}`);
+  })}.`);
 }
 
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
-  // TODO: Select and display a random employee
+  /*
+    Math.random() returns a number between 0 (inclusive) and 1 (exclusive)
+    We can use this function to get an index in the array by multiplying it by the array's length
+    Math.floor() will round down so that we get valid indexes
+  */
   const random = Math.floor(Math.random() * employeesArray.length);
   
+  // Display the random drawing winner's first name and last name to the console log
   console.log(`Congratulations to ${employeesArray[random].firstName} ${employeesArray[random].lastName}, our random drawing winner!`);
 }
 
